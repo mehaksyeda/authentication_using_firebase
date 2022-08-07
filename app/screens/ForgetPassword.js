@@ -3,45 +3,25 @@ import {View, Text , StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFe
 import { width, height, totalSize } from 'react-native-dimension';
 import Input from '../global/Input';
 import Button from '../global/Button';
-
-import { Icon} from '@rneui/themed'
-import SocialButton from '../global/SocialButton';
-const LoginScreen = ({navigation}) => {
+const ForgetPassword = ({navigation}) => {
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{flex:1}}>
             <View style={styles.header}>
-            <Text style={styles.headerText}>Welcome Back!</Text>
+            <Text style={styles.headerText}>Forget Password</Text>
 
             </View>
             <View style={styles.container}>
-                <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'}/>
-                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Password'}/>
-                <Button title={"Login"}/>
+           
+            <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'}/>
            
            
+           <Button title={"Continue"}/>
            
             
-            
+           
+           
 
-            <TouchableOpacity style={styles.forgetPassContainer} onPress={()=>navigation.navigate("ForgetPassword")}>
-                <Text style={styles.forgetPassText}>Forget Password ?</Text>
-            </TouchableOpacity>
-            
-            
-            <Text style={styles.orText}>OR</Text>
-           <View style={styles.social}>
-            <SocialButton iconType={'zocial'} iconName={'facebook'} color={"#3b5998"}/>
-            <SocialButton iconType={'entypo'} iconName={'twitter'} color={"#00acee"}/>
-            <SocialButton iconType={'fontisto'} iconName={'google'} color={"#EA4335"}/>
-            </View>
-
-            <View style={styles.textContainer}>
-            <Text style={styles.input}>Don't have an account? </Text>
-            <TouchableOpacity onPress={()=>navigation.navigate("SignUp")}>
-                <Text style={styles.forgetPassText}>Sign up</Text>
-            </TouchableOpacity>
-            </View>
             </View>
            
         </View>
@@ -106,4 +86,4 @@ const styles = StyleSheet.create({
         
     }
 })
-export default LoginScreen
+export default ForgetPassword
