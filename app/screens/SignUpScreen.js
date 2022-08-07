@@ -1,17 +1,23 @@
 import React from 'react';
-import {View, Text , StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback,Keyboard} from 'react-native';
+import {View, Text , StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView,Platform, TouchableWithoutFeedback,Keyboard} from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
 
 import {Input, Icon} from '@rneui/themed'
-const LoginScreen = ({navigation}) => {
+const SignUpScreen = ({navigation}) => {
     return(
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{flex:1}}>
+        <KeyboardAvoidingView  behavior='position'
+         style={{flex:1}}>
+            
             <View style={styles.header}>
-            <Text style={styles.headerText}>Welcome Back!</Text>
+            <Text style={styles.headerText}>Let's Get Started!</Text>
 
             </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
+            <View style={styles.inputContainer}>
+                <Icon type='fontisto' name='email' />
+            <TextInput placeholder='Full Name' style={styles.input} placeholderTextColor="black"/>
+            </View>
            
             <View style={styles.inputContainer}>
                 <Icon type='fontisto' name='email' />
@@ -22,38 +28,31 @@ const LoginScreen = ({navigation}) => {
                 <Icon type='entypo' name='key' />
             <TextInput placeholder='Password' style={styles.input} placeholderTextColor="black" />
             </View>
+            <View style={styles.inputContainer}>
+                <Icon type='entypo' name='key' />
+            <TextInput placeholder='Confirm Password' style={styles.input} placeholderTextColor="black" />
+            </View>
+
             <TouchableOpacity style={styles.button}>
-                <Text style={styles.text}>Login</Text>
+                <Text style={styles.text}>SignUp</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.forgetPassContainer}>
-                <Text style={styles.forgetPassText}>Forget Password ?</Text>
-            </TouchableOpacity>
+           
             
             
-            <Text style={styles.orText}>OR</Text>
-           <View style={styles.social}>
-            <TouchableOpacity style={styles.socailButton}>
-                <Icon type='zocial' name='facebook' size={40} color="#3b5998"/>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.socailButton}>
-                <Icon type='entypo' name='twitter' size={40} color="#00acee" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.socailButton}>
-                <Icon type='fontisto' name='google' size={40} color="#EA4335"/>
-            </TouchableOpacity>
-            </View>
+            
+          
 
             <View style={styles.textContainer}>
-            <Text style={styles.input}>Don't have an account? </Text>
-            <TouchableOpacity onPress={()=>navigation.navigate("SignUp")}>
-                <Text style={styles.forgetPassText}>Sign up</Text>
+            <Text style={styles.input}>Already have an account? </Text>
+            <TouchableOpacity onPress={()=>navigation.navigate("Login")}>
+                <Text style={styles.forgetPassText}>Login</Text>
             </TouchableOpacity>
             </View>
             </View>
+            </TouchableWithoutFeedback>
            
-        </View>
-        </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
 
     )
 
@@ -149,4 +148,4 @@ const styles = StyleSheet.create({
         
     }
 })
-export default LoginScreen
+export default SignUpScreen
