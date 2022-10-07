@@ -4,6 +4,19 @@ import { width, height, totalSize } from 'react-native-dimension';
 import Input from '../global/Input';
 import Button from '../global/Button';
 const SignUpScreen = ({navigation}) => {
+    const [email, setEmail]= React.useState('');
+const [password, setPassword] = React.useState('')
+const [confirmPassword, setConfirmPassword] = React.useState('')
+const [name, setName] = React.useState('')
+const Submit=()=>{
+    if(email!=''&& password!='' && confirmPassword!='' && name!=''){
+if(password==confirmPassword){
+console.log('login Successfully!')}
+    }else{
+        console.log('not')
+    }
+
+}
     return(
         <KeyboardAvoidingView  behavior='position'
          style={{flex:1}}>
@@ -14,12 +27,12 @@ const SignUpScreen = ({navigation}) => {
             </View>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
-            <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Full Name'}/>
-            <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'}/>
-                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Password'}/>
-                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Confirm Password'}/>
+            <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Full Name'} value={name} onChangeText={(text)=>setName(text)}/>
+            <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'} value={email} onChangeText={(text)=>setEmail(text)}/>
+                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Password'} value={password} onChangeText={(text)=>setPassword(text)} secureTextEntry={true}/>
+                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Confirm Password'} value={confirmPassword} onChangeText={(text)=>setConfirmPassword(text)} secureTextEntry={true}/>
 
-           <Button title={"Signup"}/>
+           <Button title={"Signup"} onPress={()=>Submit()}/>
 
            
             

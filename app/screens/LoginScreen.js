@@ -6,7 +6,19 @@ import Button from '../global/Button';
 
 import { Icon} from '@rneui/themed'
 import SocialButton from '../global/SocialButton';
+
 const LoginScreen = ({navigation}) => {
+    const [email, setEmail]= React.useState('');
+const [password, setPassword] = React.useState('')
+const Submit=()=>{
+    if(email!=''&& password!=''){
+        console.log('login Successfully!')
+    }else{
+        console.log('not')
+    }
+
+}
+
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{flex:1}}>
@@ -15,9 +27,9 @@ const LoginScreen = ({navigation}) => {
 
             </View>
             <View style={styles.container}>
-                <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'}/>
-                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Password'}/>
-                <Button title={"Login"}/>
+                <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'}value={email} onChangeText={(text)=>setEmail(text)}/>
+                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Password'} value={password} onChangeText={(text)=>setPassword(text)}/>
+                <Button title={"Login"} onPress={()=>Submit()}/>
            
            
            
