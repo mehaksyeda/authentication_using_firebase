@@ -2,21 +2,33 @@ import React from 'react';
 import {View, Text , StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback,Keyboard} from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
 import Input from '../global/Input';
+import { authentication } from '../../firebase';
+import { sendPasswordResetEmail} from 'firebase/auth';
+
 import Button from '../global/Button';
 const ForgetPassword = ({navigation}) => {
+    const [email, setEmail] = React.useState('')
+    const sendEmail=(email)=>{
+        if(email!=''){
+            sendPasswordResetEmail(authentication,email,null).then((res)=>console.log({res})).catch((error)=>console.log({error}))
+
+        }else{
+            alert("fill all fields")
+        }
+    }
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{flex:1}}>
             <View style={styles.header}>
-            <Text style={styles.headerText}>Forget Password</Text>
+            <Text style={styles.headerText} >Forget Password</Text>
 
             </View>
             <View style={styles.container}>
            
-            <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'}/>
+            <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'} onChangeText={(text)=>setEmail(text)} value={email}/>
            
            
-           <Button title={"Continue"}/>
+           <Button title={"Continue"} onPress={()=>sendEmail(email)}/>
            
             
            

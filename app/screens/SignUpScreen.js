@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text , StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView,Platform, TouchableWithoutFeedback,Keyboard} from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
+import { authentication } from '../../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Input from '../global/Input';
 import Button from '../global/Button';
 const SignUpScreen = ({navigation}) => {
@@ -11,11 +13,14 @@ const [name, setName] = React.useState('')
 const Submit=()=>{
     if(email!=''&& password!='' && confirmPassword!='' && name!=''){
 if(password==confirmPassword){
-console.log('login Successfully!')}
+createUserWithEmailAndPassword(authentication, email,password).then((response)=>{navigation.navigate("HomeScreen")}).catch((error)=>console.log(error))
     }else{
-        console.log('not')
+        alert('confirmed password does not match with password')
     }
 
+}else{
+    alert("fill all the feilds")
+}
 }
     return(
         <KeyboardAvoidingView  behavior='position'

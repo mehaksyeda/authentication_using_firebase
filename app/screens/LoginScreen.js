@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text , StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback,Keyboard} from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
+import { authentication } from '../../firebase';
+import { signInWithEmailAndPassword , onAuthStateChanged} from 'firebase/auth';
+
 import Input from '../global/Input';
 import Button from '../global/Button';
 
@@ -10,11 +13,21 @@ import SocialButton from '../global/SocialButton';
 const LoginScreen = ({navigation}) => {
     const [email, setEmail]= React.useState('');
 const [password, setPassword] = React.useState('')
+useEffect(()=>{
+    const user= authentication.currentUser
+    authentication.onAuthStateChanged((user)=>{
+        if(user){
+            navigation.navigate("HomeScreen")
+        }
+    })
+
+    console.log({user})
+})
 const Submit=()=>{
     if(email!=''&& password!=''){
-        console.log('login Successfully!')
+        signInWithEmailAndPassword(authentication, email, password).then((response)=>{navigation.navigate("HomeScreen")}).catch((error)=>console.log(error))
     }else{
-        console.log('not')
+        alert("Fill all feilds")
     }
 
 }
@@ -28,7 +41,7 @@ const Submit=()=>{
             </View>
             <View style={styles.container}>
                 <Input iconType={'fontisto'} iconName={'email'} placeHolder={'Email'}value={email} onChangeText={(text)=>setEmail(text)}/>
-                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Password'} value={password} onChangeText={(text)=>setPassword(text)}/>
+                <Input iconType={'entypo'} iconName={'key'} placeHolder={'Password'} value={password} onChangeText={(text)=>setPassword(text)} secureTextEntry={true}/>
                 <Button title={"Login"} onPress={()=>Submit()}/>
            
            
